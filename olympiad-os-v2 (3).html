@@ -1,0 +1,3030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympiad OS - Master Your Competition Prep</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cover Page Styles */
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .stats-banner {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .features {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .features h2 {
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Modal Styles - SIMPLIFIED */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 99999;
+        }
+
+        .modal-overlay.show {
+            display: block;
+        }
+
+        .modal-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            z-index: 100000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            background: none;
+            border: none;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 30px;
+            color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background: #5568d3;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+            border: 1px solid #f5c6cb;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .modal-footer {
+            margin-top: 15px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .modal-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.show {
+            display: block;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-header h1 {
+            color: #667eea;
+        }
+
+        .dashboard-nav {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 12px 25px;
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .analytics-section {
+            display: none;
+        }
+
+        .analytics-section.show {
+            display: block;
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .analytics-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .analytics-card h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label-left {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .stat-value-right {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .chart-placeholder {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            color: #667eea;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #764ba2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .dashboard-stats {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .dashboard-stat {
+            text-align: center;
+        }
+
+        .dashboard-stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .dashboard-stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .competitions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .competition-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .competition-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .competition-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .competition-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Problem Interface */
+        .problem-interface {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .problem-interface.show {
+            display: block;
+        }
+
+        .problem-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: #999;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #777;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-controls select {
+            padding: 12px 20px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            background: white;
+            color: #667eea;
+            font-weight: 600;
+            transition: all 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 45px;
+        }
+
+        .filter-controls select:hover {
+            border-color: #5568d3;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .filter-controls select:focus {
+            outline: none;
+            border-color: #5568d3;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .skip-btn {
+            padding: 10px 20px;
+            background: #ffc107;
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .skip-btn:hover {
+            background: #ffb300;
+        }
+
+        .problem-header {
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .problem-header h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        .problem-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .problem-difficulty {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .difficulty-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .problem-number {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+
+        .problem-content {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            color: #333;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .hint-section {
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border-radius: 15px;
+            border: 2px solid #ffc107;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+        }
+
+        .hint-section h3 {
+            color: #856404;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .hint-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hint-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+            color: #333;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+
+        .hint-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+        }
+
+        .hint-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+            box-shadow: none;
+        }
+
+        .hint-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border-left: 5px solid #ffc107;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .hint-content.show {
+            display: block;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .answer-section {
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e9f2 100%);
+            border-radius: 15px;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .answer-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #5568d3;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+            transform: scale(1.01);
+        }
+
+        .answer-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .check-answer-btn {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .check-answer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .show-answer-btn {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+        }
+
+        .show-answer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        .next-problem-btn {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            display: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .next-problem-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .next-problem-btn.show {
+            display: inline-block;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+            font-weight: bold;
+            font-size: 1.15em;
+            animation: slideDown 0.4s ease;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            border: 2px solid #28a745;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            color: #721c24;
+            border: 2px solid #dc3545;
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+        }
+
+        .answer-reveal {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px solid #ffc107;
+            display: none;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+        }
+
+        .answer-reveal.show {
+            display: block;
+            animation: slideDown 0.4s ease;
+        }
+
+        .answer-reveal h4 {
+            color: #856404;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .answer-reveal p {
+            color: #333;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .solution-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #28a745;
+        }
+
+        .solution-section h5 {
+            color: #28a745;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .solution-step {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .solution-step strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .solution-step p {
+            color: #333;
+            font-size: 1em;
+            font-weight: normal;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .hide {
+            display: none !important;
+        }
+
+        /* AI Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999999;
+        }
+
+        .chatbot-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            width: 420px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-window.show {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.3em;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-message.user {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.ai {
+            background: white;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-message.ai strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .chat-message ul {
+            margin: 10px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .chat-message li {
+            margin: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .chat-message li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.1em;
+            background: rgba(40, 167, 69, 0.1);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+
+        .chat-message .highlight {
+            background: linear-gradient(120deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .chat-message .section-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-message .tip-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #667eea;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .chat-message .stat-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .chat-message .resource-link {
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+        }
+
+        .chat-message .resource-link:hover {
+            border-bottom-color: #667eea;
+        }
+
+        .chat-message .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 0.9em;
+        }
+
+        .chat-message ol {
+            counter-reset: item;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .chat-message ol li {
+            counter-increment: item;
+            padding-left: 40px;
+            position: relative;
+            margin: 12px 0;
+        }
+
+        .chat-message ol li:before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .typing-indicator {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 18px;
+            align-self: flex-start;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .chatbot-input-area {
+            padding: 15px;
+            background: white;
+            border-top: 2px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .chatbot-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .chatbot-send {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-send:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 0 20px 15px 20px;
+        }
+
+        .quick-action-btn {
+            padding: 8px 15px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            color: #667eea;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .quick-action-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .chatbot-window {
+                width: 90vw;
+                height: 70vh;
+                right: 5vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div id="coverPage" class="cover-page">
+        <div class="logo">🏆 Olympiad OS</div>
+        <div class="tagline">Your Ultimate Competition Preparation Platform</div>
+        
+        <div class="stats-banner">
+            <div class="stat-item">
+                <span class="stat-number" id="totalUsers">0</span>
+                <span class="stat-label">Active Users</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">12,000+</span>
+                <span class="stat-label">Practice Problems</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="totalSolved">0</span>
+                <span class="stat-label">Problems Solved</span>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>Master Every Competition</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>📐 Math Olympiads</h3>
+                    <p>USAMO, USAJMO, AIME, AMC with curated problems and detailed hints</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🔬 Science Competitions</h3>
+                    <p>Science Bowl, USABO, USACO, and Astronomy challenges</p>
+                </div>
+                <div class="feature-item">
+                    <h3>💡 Smart Hints</h3>
+                    <p>Progressive hints to guide you without giving away the answer</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📊 Track Progress</h3>
+                    <p>Monitor your improvement across all competition categories</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="loginBtn">Login</button>
+            <button class="btn btn-secondary" id="signupBtn">Sign Up</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-btn" id="closeLoginBtn">&times;</button>
+            <h2>Welcome Back!</h2>
+            <div id="loginError" class="error-message"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter your password">
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <div class="modal-footer">
+                Don't have an account? <a href="#" id="switchToSignup">Sign up here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-btn" id="closeSignupBtn">&times;</button>
+            <h2>Join Olympiad OS</h2>
+            <div id="signupError" class="error-message"></div>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" required placeholder="At least 6 characters">
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </form>
+            <div class="modal-footer">
+                Already have an account? <a href="#" id="switchToLogin">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard container">
+        <div class="dashboard-header">
+            <h1>Welcome, <span id="userName">Student</span>!</h1>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="dashboard-stat">
+                <div class="dashboard-stat-number" id="dashTotalUsers">0</div>
+                <div class="dashboard-stat-label">Active Users</div>
+            </div>
+            <div class="dashboard-stat">
+                <div class="dashboard-stat-number">12,000+</div>
+                <div class="dashboard-stat-label">Available Problems</div>
+            </div>
+            <div class="dashboard-stat">
+                <div class="dashboard-stat-number" id="dashTotalSolved">0</div>
+                <div class="dashboard-stat-label">Community Solutions</div>
+            </div>
+            <div class="dashboard-stat">
+                <div class="dashboard-stat-number" id="userSolved">0</div>
+                <div class="dashboard-stat-label">Your Solutions</div>
+            </div>
+        </div>
+
+        <div class="dashboard-nav">
+            <button class="nav-tab active" id="competitionsTab">🏆 Competitions</button>
+            <button class="nav-tab" id="analyticsTab">📊 Analytics</button>
+        </div>
+
+        <div id="competitionsView">
+            <h2 style="color: white; margin-bottom: 25px; font-size: 2em;">Choose Your Competition</h2>
+            <div class="competitions-grid">
+                <div class="competition-card" data-competition="usamo">
+                    <h3>USAMO</h3>
+                    <p>USA Mathematical Olympiad - The most prestigious high school math competition in America</p>
+                </div>
+                <div class="competition-card" data-competition="usajmo">
+                    <h3>USAJMO</h3>
+                    <p>USA Junior Mathematical Olympiad - Advanced problem-solving for middle school students</p>
+                </div>
+                <div class="competition-card" data-competition="aime">
+                    <h3>AIME</h3>
+                    <p>American Invitational Mathematics Examination - Challenging problems with integer answers</p>
+                </div>
+                <div class="competition-card" data-competition="amc8">
+                    <h3>AMC 8</h3>
+                    <p>Middle school mathematics competition - 25 multiple choice problems in 40 minutes</p>
+                </div>
+                <div class="competition-card" data-competition="amc10">
+                    <h3>AMC 10</h3>
+                    <p>For students in 10th grade and below - 25 problems testing problem-solving skills</p>
+                </div>
+                <div class="competition-card" data-competition="amc12">
+                    <h3>AMC 12</h3>
+                    <p>For all high school students - More advanced topics and challenging problems</p>
+                </div>
+                <div class="competition-card" data-competition="sciencebowl">
+                    <h3>Science Bowl</h3>
+                    <p>Fast-paced science competition covering biology, chemistry, physics, math, and earth science</p>
+                </div>
+                <div class="competition-card" data-competition="usabo">
+                    <h3>USABO</h3>
+                    <p>USA Biology Olympiad - Test your knowledge in molecular biology, genetics, and ecology</p>
+                </div>
+                <div class="competition-card" data-competition="usaco">
+                    <h3>USACO</h3>
+                    <p>USA Computing Olympiad - Algorithmic problem-solving and programming challenges</p>
+                </div>
+                <div class="competition-card" data-competition="astronomy">
+                    <h3>Astronomy</h3>
+                    <p>Astronomy and astrophysics competitions - Explore the cosmos through problem-solving</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="analyticsView" class="analytics-section">
+            <h2 style="color: white; margin-bottom: 25px; font-size: 2em;">📊 Your Performance Analytics</h2>
+            
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Overall Progress</h3>
+                    <div class="stat-row">
+                        <span class="stat-label-left">Total Problems Attempted</span>
+                        <span class="stat-value-right" id="analyticsTotal">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">Correct Answers</span>
+                        <span class="stat-value-right" id="analyticsCorrect">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">Accuracy Rate</span>
+                        <span class="stat-value-right" id="analyticsAccuracy">0%</span>
+                    </div>
+                    <div class="progress-bar-container" style="margin-top: 20px;">
+                        <div class="progress-bar" id="overallProgress" style="width: 0%">0%</div>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>By Competition</h3>
+                    <div class="stat-row">
+                        <span class="stat-label-left">🔢 Math Competitions</span>
+                        <span class="stat-value-right" id="analyticsMath">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">🔬 Science Competitions</span>
+                        <span class="stat-value-right" id="analyticsScience">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">💻 Programming</span>
+                        <span class="stat-value-right" id="analyticsProgramming">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">🌟 Astronomy</span>
+                        <span class="stat-value-right" id="analyticsAstronomy">0</span>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>By Difficulty</h3>
+                    <div class="stat-row">
+                        <span class="stat-label-left">🟢 Easy Problems</span>
+                        <span class="stat-value-right" id="analyticsEasy">0</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="easyProgress" style="width: 0%; background: #28a745;">0%</div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">🟡 Medium Problems</span>
+                        <span class="stat-value-right" id="analyticsMedium">0</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="mediumProgress" style="width: 0%; background: #ffc107;">0%</div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">🔴 Hard Problems</span>
+                        <span class="stat-value-right" id="analyticsHard">0</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="hardProgress" style="width: 0%; background: #dc3545;">0%</div>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Study Streak</h3>
+                    <div class="stat-row">
+                        <span class="stat-label-left">Current Streak</span>
+                        <span class="stat-value-right">🔥 1 day</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">Longest Streak</span>
+                        <span class="stat-value-right">⭐ 1 day</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label-left">Total Study Days</span>
+                        <span class="stat-value-right" id="analyticsStudyDays">1</span>
+                    </div>
+                    <div class="chart-placeholder">
+                        📈 Activity chart coming soon!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem Interface -->
+        <div id="problemInterface" class="problem-interface">
+            <div class="problem-controls">
+                <button class="back-btn" id="backBtn">← Back to Competitions</button>
+                
+                <div class="filter-controls">
+                    <select id="competitionSelect">
+                        <option value="">Select Competition</option>
+                        <option value="usamo">USAMO</option>
+                        <option value="usajmo">USAJMO</option>
+                        <option value="aime">AIME</option>
+                        <option value="amc8">AMC 8</option>
+                        <option value="amc10">AMC 10</option>
+                        <option value="amc12">AMC 12</option>
+                        <option value="sciencebowl">Science Bowl</option>
+                        <option value="usabo">USABO</option>
+                        <option value="usaco">USACO</option>
+                        <option value="astronomy">Astronomy</option>
+                    </select>
+                    
+                    <select id="difficultySelect">
+                        <option value="">All Difficulties</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    
+                    <button class="skip-btn" id="skipBtn">Skip Problem →</button>
+                </div>
+            </div>
+            
+            <div class="problem-header">
+                <h2 id="problemTitle">Problem Title</h2>
+                <div class="problem-meta">
+                    <span id="problemDifficulty" class="problem-difficulty">Medium</span>
+                    <span class="problem-number" id="problemNumber">Problem 1</span>
+                </div>
+            </div>
+
+            <div class="problem-content" id="problemContent">
+                Problem content will appear here...
+            </div>
+
+            <div class="hint-section">
+                <h3>💡 Need Help? Use These Hints</h3>
+                <div class="hint-buttons">
+                    <button class="hint-btn" data-hint="1">Hint 1</button>
+                    <button class="hint-btn" data-hint="2">Hint 2</button>
+                    <button class="hint-btn" data-hint="3">Hint 3</button>
+                </div>
+                
+                <div id="hint1" class="hint-content">
+                    <strong>💡 Hint 1:</strong> <span id="hint1Text"></span>
+                </div>
+                <div id="hint2" class="hint-content">
+                    <strong>💡 Hint 2:</strong> <span id="hint2Text"></span>
+                </div>
+                <div id="hint3" class="hint-content">
+                    <strong>💡 Hint 3:</strong> <span id="hint3Text"></span>
+                </div>
+            </div>
+
+            <div class="answer-section">
+                <h3>✍️ Your Answer</h3>
+                <input type="text" id="answerInput" class="answer-input" placeholder="Enter your answer here...">
+                
+                <div class="answer-buttons">
+                    <button class="check-answer-btn" id="checkAnswerBtn">Check Answer</button>
+                    <button class="show-answer-btn" id="showAnswerBtn">Show Answer</button>
+                    <button class="next-problem-btn" id="nextProblemBtn">Next Problem →</button>
+                </div>
+                
+                <div id="answerReveal" class="answer-reveal">
+                    <h4>📝 Correct Answer:</h4>
+                    <p id="correctAnswerText"></p>
+                    
+                    <div class="solution-section">
+                        <h5>🔍 Step-by-Step Solution:</h5>
+                        <div id="solutionSteps"></div>
+                    </div>
+                </div>
+                
+                <div id="feedback" class="feedback">
+                    Feedback will appear here...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-button" id="chatbotToggle">🤖</button>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3>🤖 AI Study Assistant</h3>
+                <button class="chatbot-close" id="chatbotClose">×</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chat-message ai">
+                    <strong>AI Assistant</strong>
+                    Hi! I'm your AI study companion. I can help you with:
+                    <ul>
+                        <li>📚 Creating personalized study plans</li>
+                        <li>🎯 Recommending resources and videos</li>
+                        <li>💡 Explaining difficult concepts</li>
+                        <li>📊 Adapting problems based on your performance</li>
+                        <li>🎓 Providing study strategies</li>
+                    </ul>
+                    How can I help you today?
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button class="quick-action-btn" data-action="study-plan">📅 Create Study Plan</button>
+                <button class="quick-action-btn" data-action="resources">📚 Find Resources</button>
+                <button class="quick-action-btn" data-action="explain">💡 Explain Concept</button>
+                <button class="quick-action-btn" data-action="strategy">🎯 Study Strategy</button>
+            </div>
+            
+            <div class="chatbot-input-area">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask me anything...">
+                <button class="chatbot-send" id="chatbotSend">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // PROBLEM DATABASE
+        // ========================================
+        // TO ADD MORE PROBLEMS:
+        // 1. Find the competition name below (usamo, aime, etc.)
+        // 2. Add a new object inside the array with this format:
+        //    {
+        //        title: "Problem Name",
+        //        difficulty: "easy" or "medium" or "hard",
+        //        content: "The problem text goes here",
+        //        hints: [
+        //            "First hint text",
+        //            "Second hint text",
+        //            "Third hint text"
+        //        ],
+        //        answer: "The correct answer",
+        //        solution: [
+        //            "Step 1 explanation",
+        //            "Step 2 explanation",
+        //            "Step 3 explanation"
+        //        ]
+        //    }
+        // 3. Make sure to add a comma after each problem object
+        // 4. Keep the same structure for consistency
+        // ========================================
+        
+        const problems = {
+            usamo: [
+                {
+                    title: "USAMO Problem 1",
+                    difficulty: "hard",
+                    content: "Let n be a positive integer. Prove that if 2n + 1 and 3n + 1 are both perfect squares, then n is divisible by 40.",
+                    hints: [
+                        "Let 2n + 1 = a² and 3n + 1 = b² for some positive integers a and b. Try subtracting these equations.",
+                        "From b² - a² = n, we get (b-a)(b+a) = n. Since 2n + 1 = a², a must be odd. What does this tell you about b?",
+                        "Consider the equations modulo 8 and modulo 5 separately. Show that n ≡ 0 (mod 8) and n ≡ 0 (mod 5)."
+                    ],
+                    answer: "40",
+                    solution: [
+                        "Let 2n + 1 = a² and 3n + 1 = b² for positive integers a and b.",
+                        "Subtracting the first equation from the second: b² - a² = (3n + 1) - (2n + 1) = n.",
+                        "Factor the left side: (b - a)(b + a) = n.",
+                        "Since 2n + 1 = a² is odd, a must be odd. This means b² = 3n + 1 = a² + n is even, so b is even.",
+                        "Working modulo 8: Since a is odd, a² ≡ 1 (mod 8), so 2n ≡ 0 (mod 8), meaning n ≡ 0 (mod 8).",
+                        "Working modulo 5: Check all possible cases for a² and b² mod 5 to show n ≡ 0 (mod 5).",
+                        "Since n is divisible by both 8 and 5, and gcd(8,5) = 1, n must be divisible by 40."
+                    ]
+                },
+                {
+                    title: "USAMO Problem 2",
+                    difficulty: "hard",
+                    content: "Find all functions f: ℝ → ℝ such that f(x + y) = f(x) + f(y) + x²y + xy² for all real numbers x and y.",
+                    hints: [
+                        "Try substituting specific values like x = 0, y = 0 to find f(0).",
+                        "Notice that x²y + xy² = xy(x + y). This suggests the function might have a polynomial form.",
+                        "Assume f(x) = ax³ + bx² + cx + d and use the functional equation to solve for a, b, c, and d."
+                    ],
+                    answer: "f(x) = x³/3",
+                    solution: [
+                        "Set x = y = 0: f(0) = f(0) + f(0) + 0, so f(0) = 0.",
+                        "Notice that x²y + xy² = xy(x + y), so the equation becomes f(x + y) = f(x) + f(y) + xy(x + y).",
+                        "Try f(x) = ax³. Then f(x + y) = a(x + y)³ = a(x³ + 3x²y + 3xy² + y³).",
+                        "And f(x) + f(y) + xy(x + y) = ax³ + ay³ + x²y + xy².",
+                        "Comparing coefficients: a(x³ + y³) + 3a(x²y + xy²) = ax³ + ay³ + x²y + xy².",
+                        "This gives us 3a = 1, so a = 1/3.",
+                        "Therefore, f(x) = x³/3 is the unique solution."
+                    ]
+                }
+            ],
+            usajmo: [
+                {
+                    title: "USAJMO Problem 1",
+                    difficulty: "medium",
+                    content: "Prove that for any positive integers a and b, the number (a + b)² - (a - b)² is always divisible by 4.",
+                    hints: [
+                        "Expand both squared terms using (x + y)² = x² + 2xy + y² and (x - y)² = x² - 2xy + y².",
+                        "After expanding, many terms will cancel. What remains?",
+                        "The expression simplifies to 4ab, which is clearly divisible by 4."
+                    ],
+                    answer: "4ab",
+                    solution: [
+                        "Expand (a + b)² using the formula: (a + b)² = a² + 2ab + b².",
+                        "Expand (a - b)² using the formula: (a - b)² = a² - 2ab + b².",
+                        "Calculate the difference: (a + b)² - (a - b)² = (a² + 2ab + b²) - (a² - 2ab + b²).",
+                        "Simplify: a² + 2ab + b² - a² + 2ab - b² = 4ab.",
+                        "Since 4ab = 4 × (ab), it is clearly divisible by 4 for any positive integers a and b."
+                    ]
+                }
+            ],
+            aime: [
+                {
+                    title: "AIME Problem 1",
+                    difficulty: "medium",
+                    content: "How many positive integers less than 1000 are not divisible by 2, 3, or 5?",
+                    hints: [
+                        "Use the Inclusion-Exclusion Principle. Start by counting how many numbers ARE divisible by 2, 3, or 5.",
+                        "Count divisible by 2: 499, by 3: 333, by 5: 199. But we've overcounted numbers divisible by multiple of these.",
+                        "Add back numbers divisible by 6, 10, 15, then subtract numbers divisible by 30. Final answer: 999 - (this sum)."
+                    ],
+                    answer: "266",
+                    solution: [
+                        "Total positive integers less than 1000: 999.",
+                        "Count numbers divisible by 2: ⌊999/2⌋ = 499.",
+                        "Count numbers divisible by 3: ⌊999/3⌋ = 333.",
+                        "Count numbers divisible by 5: ⌊999/5⌋ = 199.",
+                        "By inclusion-exclusion, subtract numbers divisible by pairs: divisible by 6: ⌊999/6⌋ = 166, by 10: ⌊999/10⌋ = 99, by 15: ⌊999/15⌋ = 66.",
+                        "Add back numbers divisible by all three (divisible by 30): ⌊999/30⌋ = 33.",
+                        "Using inclusion-exclusion: 499 + 333 + 199 - 166 - 99 - 66 + 33 = 733 numbers ARE divisible by at least one of 2, 3, or 5.",
+                        "Therefore, numbers NOT divisible by any of them: 999 - 733 = 266."
+                    ]
+                }
+            ],
+            amc8: [
+                {
+                    title: "AMC 8 Problem 1",
+                    difficulty: "easy",
+                    content: "What is the value of (2 + 3) × 4 - 5?",
+                    hints: [
+                        "Follow the order of operations: parentheses first, then multiplication, then subtraction.",
+                        "Calculate inside the parentheses: 2 + 3 = 5.",
+                        "Then multiply: 5 × 4 = 20. Finally subtract: 20 - 5 = 15."
+                    ],
+                    answer: "15",
+                    solution: [
+                        "Follow PEMDAS (order of operations): Parentheses, Exponents, Multiplication/Division, Addition/Subtraction.",
+                        "First, evaluate the parentheses: 2 + 3 = 5.",
+                        "Next, perform multiplication: 5 × 4 = 20.",
+                        "Finally, perform subtraction: 20 - 5 = 15.",
+                        "The answer is 15."
+                    ]
+                }
+            ],
+            amc10: [
+                {
+                    title: "AMC 10 Problem 1",
+                    difficulty: "easy",
+                    content: "What is the value of (2³ + 2³)/(2² + 2²)?",
+                    hints: [
+                        "Calculate the numerator first: 2³ = 8, so 8 + 8 = 16.",
+                        "Calculate the denominator: 2² = 4, so 4 + 4 = 8.",
+                        "Divide: 16/8 = 2."
+                    ],
+                    answer: "2",
+                    solution: [
+                        "Calculate the numerator: 2³ = 2 × 2 × 2 = 8.",
+                        "Add the terms in the numerator: 8 + 8 = 16.",
+                        "Calculate the denominator: 2² = 2 × 2 = 4.",
+                        "Add the terms in the denominator: 4 + 4 = 8.",
+                        "Divide the numerator by the denominator: 16 ÷ 8 = 2.",
+                        "The answer is 2."
+                    ]
+                }
+            ],
+            amc12: [
+                {
+                    title: "AMC 12 Problem 1",
+                    difficulty: "medium",
+                    content: "For how many positive integers n does 1/n yield a terminating decimal with a non-zero hundredths digit?",
+                    hints: [
+                        "A fraction 1/n yields a terminating decimal if and only if n has only factors of 2 and 5.",
+                        "List out values: n can be 2ᵃ × 5ᵇ where a, b ≥ 0.",
+                        "Check which values give a non-zero hundredths digit by computing 1/n for small values."
+                    ],
+                    answer: "4",
+                    solution: [
+                        "For 1/n to be a terminating decimal, n must be of the form 2ᵃ × 5ᵇ.",
+                        "The hundredths place corresponds to 1/100 = 1/(2² × 5²).",
+                        "We need 1/n to have exactly 2 decimal places with the second being non-zero.",
+                        "Check small values: 1/4 = 0.25 (hundredths digit: 5), 1/20 = 0.05 (hundredths digit: 5), 1/25 = 0.04 (hundredths digit: 4), 1/50 = 0.02 (hundredths digit: 2).",
+                        "These four values (n = 4, 20, 25, 50) give non-zero hundredths digits.",
+                        "The answer is 4."
+                    ]
+                }
+            ],
+            sciencebowl: [
+                {
+                    title: "Science Bowl - Physics",
+                    difficulty: "medium",
+                    content: "A ball is thrown vertically upward with an initial velocity of 20 m/s. Ignoring air resistance and using g = 10 m/s², what is the maximum height reached by the ball in meters?",
+                    hints: [
+                        "At maximum height, the final velocity is 0. Use the kinematic equation v² = u² + 2as.",
+                        "Here, v = 0, u = 20 m/s, a = -10 m/s² (negative because gravity opposes upward motion).",
+                        "Solve for s: 0 = 400 - 20s, which gives s = 20 meters."
+                    ],
+                    answer: "20",
+                    solution: [
+                        "Identify the known values: initial velocity u = 20 m/s, final velocity v = 0 m/s (at max height), acceleration a = -10 m/s² (gravity).",
+                        "Use the kinematic equation: v² = u² + 2as.",
+                        "Substitute the values: 0² = 20² + 2(-10)s.",
+                        "Simplify: 0 = 400 - 20s.",
+                        "Solve for s: 20s = 400, so s = 20 meters.",
+                        "The maximum height reached is 20 meters."
+                    ]
+                }
+            ],
+            usabo: [
+                {
+                    title: "USABO - Cell Biology",
+                    difficulty: "medium",
+                    content: "What is the primary function of the Golgi apparatus in eukaryotic cells?",
+                    hints: [
+                        "The Golgi apparatus is involved in processing materials after they leave the endoplasmic reticulum.",
+                        "It modifies, sorts, and packages proteins and lipids.",
+                        "Think of it as the 'post office' of the cell - it packages and ships materials to their destinations."
+                    ],
+                    answer: "packaging and modifying proteins",
+                    solution: [
+                        "The Golgi apparatus (also called Golgi complex or Golgi body) is an organelle in eukaryotic cells.",
+                        "It receives proteins and lipids from the endoplasmic reticulum (ER).",
+                        "The Golgi modifies these molecules by adding chemical groups (like carbohydrates in glycosylation).",
+                        "It sorts and packages the modified molecules into vesicles.",
+                        "These vesicles then transport the molecules to their final destinations (cell membrane, lysosomes, or secretion outside the cell).",
+                        "Primary function: packaging and modifying proteins and lipids for distribution."
+                    ]
+                }
+            ],
+            usaco: [
+                {
+                    title: "USACO Bronze - Arrays",
+                    difficulty: "medium",
+                    content: "Given an array of N integers, find the maximum sum of any contiguous subarray. For example, if the array is [-2, 1, -3, 4, -1, 2, 1, -5, 4], the maximum sum is 6 (from the subarray [4, -1, 2, 1]).",
+                    hints: [
+                        "This is the classic 'Maximum Subarray Problem'. Consider using Kadane's Algorithm.",
+                        "Keep track of two values: the maximum sum ending at the current position, and the overall maximum sum seen so far.",
+                        "At each position, decide whether to extend the current subarray or start a new one from the current element."
+                    ],
+                    answer: "6",
+                    solution: [
+                        "This problem can be solved using Kadane's Algorithm in O(n) time.",
+                        "Initialize two variables: max_current = arr[0] and max_global = arr[0].",
+                        "For each element from index 1 to n-1: max_current = max(arr[i], max_current + arr[i]).",
+                        "This decides whether to start a new subarray at arr[i] or extend the previous subarray.",
+                        "Update max_global = max(max_global, max_current) after each step.",
+                        "For the example [-2, 1, -3, 4, -1, 2, 1, -5, 4]: The maximum subarray is [4, -1, 2, 1] with sum = 6."
+                    ]
+                }
+            ],
+            astronomy: [
+                {
+                    title: "Astronomy - Stellar Properties",
+                    difficulty: "medium",
+                    content: "A star has an apparent magnitude of 2 and an absolute magnitude of -3. What is its distance from Earth in parsecs?",
+                    hints: [
+                        "Use the distance modulus formula: m - M = 5 log₁₀(d) - 5, where m is apparent magnitude, M is absolute magnitude, and d is distance in parsecs.",
+                        "Substitute: 2 - (-3) = 5 log₁₀(d) - 5, which gives 5 = 5 log₁₀(d) - 5.",
+                        "Solve: 10 = 5 log₁₀(d), so log₁₀(d) = 2, therefore d = 100 parsecs."
+                    ],
+                    answer: "100",
+                    solution: [
+                        "The distance modulus formula relates apparent magnitude (m), absolute magnitude (M), and distance (d): m - M = 5 log₁₀(d) - 5.",
+                        "Given: m = 2 (apparent magnitude) and M = -3 (absolute magnitude).",
+                        "Substitute into the formula: 2 - (-3) = 5 log₁₀(d) - 5.",
+                        "Simplify the left side: 5 = 5 log₁₀(d) - 5.",
+                        "Add 5 to both sides: 10 = 5 log₁₀(d).",
+                        "Divide by 5: log₁₀(d) = 2.",
+                        "Take the antilog (10^x): d = 10² = 100 parsecs.",
+                        "The star is 100 parsecs away from Earth."
+                    ]
+                }
+            ]
+        };
+
+        // App State
+        let currentUser = null;
+        let currentCompetition = null;
+        let currentProblemIndex = 0;
+
+        // DOM Elements
+        const coverPage = document.getElementById('coverPage');
+        const dashboard = document.getElementById('dashboard');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const problemInterface = document.getElementById('problemInterface');
+        const competitionsView = document.getElementById('competitionsView');
+
+        // Initialize
+        function init() {
+            updateStats();
+            setupEventListeners();
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Login/Signup buttons
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                loginModal.classList.add('show');
+            });
+
+            document.getElementById('signupBtn').addEventListener('click', () => {
+                signupModal.classList.add('show');
+            });
+
+            // Close buttons
+            document.getElementById('closeLoginBtn').addEventListener('click', () => {
+                loginModal.classList.remove('show');
+                clearLoginForm();
+            });
+
+            document.getElementById('closeSignupBtn').addEventListener('click', () => {
+                signupModal.classList.remove('show');
+                clearSignupForm();
+            });
+
+            // Switch between login/signup
+            document.getElementById('switchToSignup').addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.classList.remove('show');
+                signupModal.classList.add('show');
+            });
+
+            document.getElementById('switchToLogin').addEventListener('click', (e) => {
+                e.preventDefault();
+                signupModal.classList.remove('show');
+                loginModal.classList.add('show');
+            });
+
+            // Forms
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('signupForm').addEventListener('submit', handleSignup);
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+            // Tab navigation
+            document.getElementById('competitionsTab').addEventListener('click', () => {
+                showTab('competitions');
+            });
+
+            document.getElementById('analyticsTab').addEventListener('click', () => {
+                showTab('analytics');
+                updateAnalytics();
+            });
+
+            // Competition cards
+            document.querySelectorAll('.competition-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const competition = card.getAttribute('data-competition');
+                    loadCompetition(competition);
+                });
+            });
+
+            // Back button
+            document.getElementById('backBtn').addEventListener('click', () => {
+                problemInterface.classList.remove('show');
+                competitionsView.style.display = 'block';
+            });
+
+            // Hint buttons
+            document.querySelectorAll('.hint-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const hintNum = btn.getAttribute('data-hint');
+                    document.getElementById('hint' + hintNum).classList.add('show');
+                    btn.disabled = true;
+                });
+            });
+
+            // Answer checking
+            document.getElementById('checkAnswerBtn').addEventListener('click', checkAnswer);
+            document.getElementById('nextProblemBtn').addEventListener('click', loadNextProblem);
+            
+            // Skip button
+            document.getElementById('skipBtn').addEventListener('click', loadNextProblem);
+            
+            // Show answer button
+            document.getElementById('showAnswerBtn').addEventListener('click', showAnswer);
+            
+            // Competition selector
+            document.getElementById('competitionSelect').addEventListener('change', (e) => {
+                const competition = e.target.value;
+                if (competition) {
+                    loadCompetition(competition);
+                }
+            });
+            
+            // Difficulty filter (will be used when loading problems)
+            document.getElementById('difficultySelect').addEventListener('change', () => {
+                if (currentCompetition) {
+                    currentProblemIndex = 0;
+                    loadProblem();
+                }
+            });
+
+            // Close modal on overlay click
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.classList.remove('show');
+                    clearLoginForm();
+                }
+            });
+
+            signupModal.addEventListener('click', (e) => {
+                if (e.target === signupModal) {
+                    signupModal.classList.remove('show');
+                    clearSignupForm();
+                }
+            });
+
+            // Chatbot events
+            document.getElementById('chatbotToggle').addEventListener('click', toggleChatbot);
+            document.getElementById('chatbotClose').addEventListener('click', toggleChatbot);
+            document.getElementById('chatbotSend').addEventListener('click', sendChatMessage);
+            document.getElementById('chatbotInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            });
+
+            // Quick action buttons
+            document.querySelectorAll('.quick-action-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const action = btn.getAttribute('data-action');
+                    handleQuickAction(action);
+                });
+            });
+        }
+
+        // Auth Functions
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            const errorEl = document.getElementById('loginError');
+            errorEl.classList.remove('show');
+
+            if (!email || !password) {
+                showError('loginError', '⚠️ Please fill in all fields.');
+                return;
+            }
+
+            const userData = localStorage.getItem('user_' + email);
+            
+            if (!userData) {
+                showError('loginError', '❌ No account found with this email. Please sign up first.');
+                return;
+            }
+
+            const user = JSON.parse(userData);
+            
+            if (user.password !== password) {
+                showError('loginError', '❌ Incorrect password. Please try again.');
+                return;
+            }
+
+            // Success!
+            currentUser = user;
+            loginModal.classList.remove('show');
+            coverPage.classList.add('hide');
+            dashboard.classList.add('show');
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('userSolved').textContent = user.problemsSolved || 0;
+            clearLoginForm();
+            updateStats();
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+
+            const errorEl = document.getElementById('signupError');
+            errorEl.classList.remove('show');
+
+            if (!name || !email || !password) {
+                showError('signupError', '⚠️ Please fill in all fields.');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('signupError', '❌ Password must be at least 6 characters long. Your password is only ' + password.length + ' character(s).');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('signupError', '❌ Please enter a valid email address.');
+                return;
+            }
+
+            if (localStorage.getItem('user_' + email)) {
+                showError('signupError', '⚠️ An account with this email already exists. Please login instead.');
+                return;
+            }
+
+            // Create user
+            const userData = {
+                name: name,
+                email: email,
+                password: password,
+                problemsSolved: 0,
+                createdAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('user_' + email, JSON.stringify(userData));
+            
+            // Success!
+            currentUser = userData;
+            signupModal.classList.remove('show');
+            coverPage.classList.add('hide');
+            dashboard.classList.add('show');
+            document.getElementById('userName').textContent = name;
+            document.getElementById('userSolved').textContent = 0;
+            clearSignupForm();
+            updateStats();
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            dashboard.classList.remove('show');
+            coverPage.classList.remove('hide');
+            problemInterface.classList.remove('show');
+            competitionsView.style.display = 'block';
+        }
+
+        function showError(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.classList.add('show');
+        }
+
+        function clearLoginForm() {
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginError').classList.remove('show');
+        }
+
+        function clearSignupForm() {
+            document.getElementById('signupName').value = '';
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+            document.getElementById('signupError').classList.remove('show');
+        }
+
+        // Stats Functions
+        function updateStats() {
+            let totalUsers = 0;
+            let totalSolved = 0;
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('user_')) {
+                    totalUsers++;
+                    const user = JSON.parse(localStorage.getItem(key));
+                    totalSolved += user.problemsSolved || 0;
+                }
+            }
+
+            document.getElementById('totalUsers').textContent = totalUsers;
+            document.getElementById('totalSolved').textContent = totalSolved;
+            document.getElementById('dashTotalUsers').textContent = totalUsers;
+            document.getElementById('dashTotalSolved').textContent = totalSolved;
+        }
+
+        // Tab Navigation
+        function showTab(tabName) {
+            const competitionsView = document.getElementById('competitionsView');
+            const analyticsView = document.getElementById('analyticsView');
+            const competitionsTab = document.getElementById('competitionsTab');
+            const analyticsTab = document.getElementById('analyticsTab');
+
+            if (tabName === 'competitions') {
+                competitionsView.style.display = 'block';
+                analyticsView.classList.remove('show');
+                competitionsTab.classList.add('active');
+                analyticsTab.classList.remove('active');
+            } else if (tabName === 'analytics') {
+                competitionsView.style.display = 'none';
+                analyticsView.classList.add('show');
+                competitionsTab.classList.remove('active');
+                analyticsTab.classList.add('active');
+            }
+        }
+
+        // Analytics Functions
+        function updateAnalytics() {
+            if (!currentUser) return;
+
+            const totalProblems = currentUser.problemsSolved || 0;
+            const correctAnswers = Math.floor(totalProblems * 0.75); // Simulated for now
+            const accuracy = totalProblems > 0 ? Math.round((correctAnswers / totalProblems) * 100) : 0;
+
+            document.getElementById('analyticsTotal').textContent = totalProblems;
+            document.getElementById('analyticsCorrect').textContent = correctAnswers;
+            document.getElementById('analyticsAccuracy').textContent = accuracy + '%';
+            
+            const progressBar = document.getElementById('overallProgress');
+            progressBar.style.width = accuracy + '%';
+            progressBar.textContent = accuracy + '%';
+
+            // Simulated breakdown by competition type
+            const mathProblems = Math.floor(totalProblems * 0.4);
+            const scienceProblems = Math.floor(totalProblems * 0.3);
+            const programmingProblems = Math.floor(totalProblems * 0.2);
+            const astronomyProblems = totalProblems - mathProblems - scienceProblems - programmingProblems;
+
+            document.getElementById('analyticsMath').textContent = mathProblems;
+            document.getElementById('analyticsScience').textContent = scienceProblems;
+            document.getElementById('analyticsProgramming').textContent = programmingProblems;
+            document.getElementById('analyticsAstronomy').textContent = astronomyProblems;
+
+            // Simulated breakdown by difficulty
+            const easyProblems = Math.floor(totalProblems * 0.3);
+            const mediumProblems = Math.floor(totalProblems * 0.5);
+            const hardProblems = totalProblems - easyProblems - mediumProblems;
+
+            document.getElementById('analyticsEasy').textContent = easyProblems;
+            document.getElementById('analyticsMedium').textContent = mediumProblems;
+            document.getElementById('analyticsHard').textContent = hardProblems;
+
+            // Update progress bars for difficulty
+            const easyPercent = totalProblems > 0 ? Math.round((easyProblems / totalProblems) * 100) : 0;
+            const mediumPercent = totalProblems > 0 ? Math.round((mediumProblems / totalProblems) * 100) : 0;
+            const hardPercent = totalProblems > 0 ? Math.round((hardProblems / totalProblems) * 100) : 0;
+
+            document.getElementById('easyProgress').style.width = easyPercent + '%';
+            document.getElementById('easyProgress').textContent = easyPercent + '%';
+            document.getElementById('mediumProgress').style.width = mediumPercent + '%';
+            document.getElementById('mediumProgress').textContent = mediumPercent + '%';
+            document.getElementById('hardProgress').style.width = hardPercent + '%';
+            document.getElementById('hardProgress').textContent = hardPercent + '%';
+
+            document.getElementById('analyticsStudyDays').textContent = Math.max(1, Math.floor(totalProblems / 10));
+        }
+
+        // Competition Functions
+        function loadCompetition(competition) {
+            currentCompetition = competition;
+            currentProblemIndex = 0;
+            
+            // Update the competition selector
+            document.getElementById('competitionSelect').value = competition;
+            
+            loadProblem();
+        }
+
+        function loadProblem() {
+            const problemList = problems[currentCompetition];
+            if (!problemList || currentProblemIndex >= problemList.length) {
+                alert('No more problems available in this competition!');
+                currentProblemIndex = 0; // Loop back to first problem
+                if (!problemList) return;
+            }
+
+            // Filter by difficulty if selected
+            const selectedDifficulty = document.getElementById('difficultySelect').value;
+            let filteredProblems = problemList;
+            
+            if (selectedDifficulty) {
+                filteredProblems = problemList.filter(p => p.difficulty === selectedDifficulty);
+                if (filteredProblems.length === 0) {
+                    alert('No problems found with this difficulty level!');
+                    document.getElementById('difficultySelect').value = '';
+                    return;
+                }
+            }
+
+            const problem = filteredProblems[currentProblemIndex % filteredProblems.length];
+
+            // Update solved count
+            if (currentUser) {
+                currentUser.problemsSolved = (currentUser.problemsSolved || 0) + 1;
+                localStorage.setItem('user_' + currentUser.email, JSON.stringify(currentUser));
+                document.getElementById('userSolved').textContent = currentUser.problemsSolved;
+                updateStats();
+            }
+
+            // Load problem
+            document.getElementById('problemTitle').textContent = problem.title;
+            document.getElementById('problemDifficulty').textContent = problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1);
+            document.getElementById('problemDifficulty').className = 'problem-difficulty difficulty-' + problem.difficulty;
+            document.getElementById('problemNumber').textContent = 'Problem ' + (currentProblemIndex + 1);
+            document.getElementById('problemContent').textContent = problem.content;
+
+            // Load hints
+            document.getElementById('hint1Text').textContent = problem.hints[0];
+            document.getElementById('hint2Text').textContent = problem.hints[1];
+            document.getElementById('hint3Text').textContent = problem.hints[2];
+
+            // Reset UI
+            document.querySelectorAll('.hint-content').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('.hint-btn').forEach(btn => btn.disabled = false);
+            document.getElementById('answerInput').value = '';
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+            document.getElementById('answerReveal').classList.remove('show');
+            document.getElementById('nextProblemBtn').classList.remove('show');
+
+            // Show problem interface
+            competitionsView.style.display = 'none';
+            problemInterface.classList.add('show');
+        }
+
+        function showAnswer() {
+            const problem = problems[currentCompetition][currentProblemIndex];
+            document.getElementById('correctAnswerText').textContent = problem.answer;
+            
+            // Display step-by-step solution
+            const solutionSteps = document.getElementById('solutionSteps');
+            solutionSteps.innerHTML = '';
+            
+            if (problem.solution && problem.solution.length > 0) {
+                problem.solution.forEach((step, index) => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'solution-step';
+                    stepDiv.innerHTML = `<strong>Step ${index + 1}:</strong><p>${step}</p>`;
+                    solutionSteps.appendChild(stepDiv);
+                });
+            } else {
+                solutionSteps.innerHTML = '<p style="color: #666; font-style: italic;">Detailed solution not available for this problem yet.</p>';
+            }
+            
+            document.getElementById('answerReveal').classList.add('show');
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+            const problem = problems[currentCompetition][currentProblemIndex];
+            const correctAnswer = problem.answer.toLowerCase();
+
+            const feedback = document.getElementById('feedback');
+            feedback.classList.add('show');
+
+            const isCorrect = userAnswer === correctAnswer || userAnswer.includes(correctAnswer) || correctAnswer.includes(userAnswer);
+
+            if (isCorrect) {
+                feedback.textContent = '🎉 Correct! Well done!';
+                feedback.classList.remove('incorrect');
+                feedback.classList.add('correct');
+                document.getElementById('nextProblemBtn').classList.add('show');
+                trackProblemAttempt(true);
+            } else {
+                feedback.textContent = '❌ Not quite right. Try again or use the hints!';
+                feedback.classList.remove('correct');
+                feedback.classList.add('incorrect');
+                trackProblemAttempt(false);
+            }
+        }
+
+        function loadNextProblem() {
+            currentProblemIndex++;
+            loadProblem();
+        }
+
+        // AI Chatbot Functions
+        let chatbotOpen = false;
+        let userPerformance = {
+            weak_topics: [],
+            strong_topics: [],
+            difficulty_level: 'medium',
+            recent_mistakes: []
+        };
+
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            chatbotOpen = !chatbotOpen;
+            if (chatbotOpen) {
+                chatbotWindow.classList.add('show');
+            } else {
+                chatbotWindow.classList.remove('show');
+            }
+        }
+
+        function addMessageToChat(message, isUser = false) {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${isUser ? 'user' : 'ai'}`;
+            
+            if (!isUser) {
+                messageDiv.innerHTML = `<strong>AI Assistant</strong>${message}`;
+            } else {
+                messageDiv.textContent = message;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<span></span><span></span><span></span>';
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessageToChat(message, true);
+            input.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Simulate AI response after delay
+            setTimeout(() => {
+                removeTypingIndicator();
+                const response = generateAIResponse(message);
+                addMessageToChat(response);
+            }, 1500);
+        }
+
+        function handleQuickAction(action) {
+            const messages = {
+                'study-plan': 'I\'d love to create a personalized study plan for you! ',
+                'resources': 'Let me recommend some great resources! ',
+                'explain': 'I\'m here to explain any concept you\'re struggling with. ',
+                'strategy': 'Let me share some effective study strategies! '
+            };
+            
+            addMessageToChat(messages[action] || 'How can I help?', true);
+            
+            showTypingIndicator();
+            setTimeout(() => {
+                removeTypingIndicator();
+                
+                if (action === 'study-plan') {
+                    generateStudyPlan();
+                } else if (action === 'resources') {
+                    recommendResources();
+                } else if (action === 'explain') {
+                    offerExplanation();
+                } else if (action === 'strategy') {
+                    shareStrategy();
+                }
+            }, 1500);
+        }
+
+        function generateAIResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            const userProblems = currentUser ? currentUser.problemsSolved || 0 : 0;
+            
+            // Greeting responses
+            if (lowerMessage.match(/^(hi|hello|hey|greetings)/)) {
+                return `Hey there! 👋 I see you've solved <span class="stat-highlight">${userProblems} problems</span> so far—${userProblems > 50 ? 'impressive progress!' : userProblems > 10 ? 'you\'re building momentum!' : 'great start!'}<br><br>I'm here to help you <span class="highlight">accelerate your learning</span>. I can:<br><ul><li>Design a personalized study plan just for you</li><li>Recommend the best resources and videos</li><li>Explain difficult concepts in simple terms</li><li>Share proven strategies from top performers</li></ul><br>What would you like to work on today? 🚀`;
+            }
+            
+            // Motivation and encouragement
+            if (lowerMessage.includes('hard') || lowerMessage.includes('difficult') || lowerMessage.includes('give up') || lowerMessage.includes('frustrated')) {
+                return `<div class="section-title">💪 You're Facing the Champion's Challenge</div>
+                
+                Here's something important: <span class="highlight">Every expert was once exactly where you are</span>. The difficulty you're experiencing? That's not a sign you're bad at this—it's a sign you're growing!<br><br>
+                
+                <div class="tip-box">
+                🧠 <strong>Science Fact:</strong> Your brain literally rewires itself when you struggle through hard problems. The frustration you feel is your neurons making new connections. Embrace it!
+                </div><br>
+                
+                <strong>Here's what to do right now:</strong><br>
+                <ol>
+                    <li>Take a 5-minute break. Seriously. Your subconscious needs processing time.</li>
+                    <li>Come back and re-read the problem with fresh eyes.</li>
+                    <li>Use one hint at a time. Don't rush to the answer.</li>
+                    <li>If still stuck after 3 hints, look at the solution—but then redo the problem from scratch.</li>
+                </ol><br>
+                
+                You've already solved ${userProblems} problems. You CAN do this. Want me to suggest some confidence-building problems at your current level? 🌟`;
+            }
+            
+            // Study plan keywords
+            if (lowerMessage.includes('study plan') || lowerMessage.includes('schedule') || lowerMessage.includes('how to study') || lowerMessage.includes('routine')) {
+                return generateStudyPlanResponse();
+            }
+            
+            // Resource keywords  
+            if (lowerMessage.includes('resource') || lowerMessage.includes('video') || lowerMessage.includes('book') || lowerMessage.includes('learn') || lowerMessage.includes('tutorial') || lowerMessage.includes('where to') || lowerMessage.includes('recommend')) {
+                return recommendResourcesResponse();
+            }
+            
+            // Help with problem keywords
+            if (lowerMessage.includes('help') || lowerMessage.includes('stuck') || lowerMessage.includes('don\'t understand') || lowerMessage.includes('explain') || lowerMessage.includes('confused') || lowerMessage.includes('how do i')) {
+                return offerExplanationResponse();
+            }
+            
+            // Strategy keywords
+            if (lowerMessage.includes('strategy') || lowerMessage.includes('strateg') || lowerMessage.includes('tips') || lowerMessage.includes('improve') || lowerMessage.includes('better') || lowerMessage.includes('faster') || lowerMessage.includes('technique')) {
+                return shareStrategyResponse();
+            }
+            
+            // Competition specific
+            if (lowerMessage.includes('usamo') || lowerMessage.includes('aime') || lowerMessage.includes('amc') || lowerMessage.includes('usaco') || lowerMessage.includes('usabo')) {
+                const comp = extractCompetition(lowerMessage);
+                return `<div class="section-title">🏆 ${comp} Preparation Guide</div>
+                
+                Excellent choice! ${comp} is a ${lowerMessage.includes('usamo') ? 'highly prestigious' : lowerMessage.includes('aime') ? 'challenging invitational' : 'excellent'} competition.<br><br>
+                
+                <strong>What you need to know:</strong><br>
+                <ul>
+                    <li><strong>Your current level:</strong> With <span class="stat-highlight">${userProblems} problems solved</span>, you're ${userProblems > 50 ? 'well-prepared for serious competition prep' : userProblems > 20 ? 'building a solid foundation' : 'just getting started—keep going!'}.</li>
+                    <li><strong>Focus areas:</strong> ${comp} emphasizes ${getCompFocus(comp)}.</li>
+                    <li><strong>Timeline:</strong> ${getCompTimeline(comp)}</li>
+                </ul><br>
+                
+                I can help you with:<br>
+                • A targeted study plan for ${comp}<br>
+                • Competition-specific resources and past papers<br>
+                • Practice problems at the right difficulty<br>
+                • Test-taking strategies for ${comp}<br><br>
+                
+                What specific help do you need for ${comp}? 🎯`;
+            }
+            
+            // Time management
+            if (lowerMessage.includes('time') && (lowerMessage.includes('manage') || lowerMessage.includes('not enough') || lowerMessage.includes('slow'))) {
+                return `<div class="section-title">⏱️ Master Time Management</div>
+                
+                Time is your most valuable resource! Here's how to maximize it:<br><br>
+                
+                <ol>
+                    <li><strong>Track Your Time:</strong> For one week, log how long each problem takes. You'll find patterns.</li>
+                    <li><strong>The 80/20 Rule:</strong> Focus 80% of your time on your weakest 20% of topics. That's where growth happens fastest.</li>
+                    <li><strong>Quality > Quantity:</strong> One deeply understood problem beats five rushed ones.</li>
+                    <li><strong>Use Dead Time:</strong> Review flashcards on the bus. Watch 10-min videos during breakfast.</li>
+                </ol><br>
+                
+                <div class="tip-box">
+                💡 <strong>Efficiency Hack:</strong> Start each study session by writing down exactly what you want to accomplish. "Solve 3 AIME problems on combinatorics." This focus will double your productivity!
+                </div><br>
+                
+                Want me to create a time-optimized study schedule? Just ask! ⚡`;
+            }
+            
+            // Practice and improvement
+            if (lowerMessage.includes('practice') || lowerMessage.includes('get better') || lowerMessage.includes('improve my')) {
+                return `<div class="section-title">📈 The Science of Deliberate Practice</div>
+                
+                You're asking the RIGHT question! Here's how to practice effectively:<br><br>
+                
+                <strong>🎯 Target Your Weak Points</strong><br>
+                <ul>
+                    <li>Check your Analytics tab—identify topics below 70% accuracy</li>
+                    <li>Spend 70% of practice time on weaknesses, 30% on strengths</li>
+                    <li>Your weakness today = your breakthrough tomorrow!</li>
+                </ul><br>
+                
+                <strong>🔄 The Feedback Loop (Critical!)</strong><br>
+                <ol>
+                    <li><strong>Attempt:</strong> Try the problem seriously for 10+ minutes</li>
+                    <li><strong>Check:</strong> Compare with the solution</li>
+                    <li><strong>Analyze:</strong> Why was your approach wrong? What was the key insight?</li>
+                    <li><strong>Redo:</strong> Solve it again from scratch within 24 hours</li>
+                    <li><strong>Review:</strong> Come back to it after 1 week</li>
+                </ol><br>
+                
+                <div class="tip-box">
+                🔥 <strong>Game-Changer:</strong> After solving ANY problem, ask yourself: "What category does this belong to?" Build a mental library of problem types and solutions. This pattern recognition is what separates good from great!
+                </div><br>
+                
+                Currently on <span class="highlight">${currentCompetition || 'no specific competition'}</span>. Want me to recommend 5 problems perfectly suited to your current level? 💪`;
+            }
+            
+            // Thank you
+            if (lowerMessage.match(/thank/)) {
+                return `You're very welcome! 😊<br><br>Remember: <span class="highlight">Every problem you solve makes you stronger</span>. You're not just learning math/science—you're training your brain to think like a champion.<br><br>Keep up the amazing work! I'm here whenever you need guidance. 🚀`;
+            }
+            
+            // Default intelligent response
+            return `<div class="section-title">🤔 Interesting Question!</div>
+            
+            You asked: <span class="highlight">"${userMessage}"</span><br><br>
+            
+            I'm your AI study companion, and I'm here to help you succeed! I'm particularly good at:<br><br>
+            
+            <ul>
+                <li><strong>📅 Study Planning:</strong> Creating personalized schedules that fit your goals and level (${userProblems} problems solved so far!)</li>
+                <li><strong>📚 Resource Curation:</strong> Finding the best videos, books, and websites for your specific needs</li>
+                <li><strong>💡 Concept Explanation:</strong> Breaking down difficult topics into understandable pieces</li>
+                <li><strong>🎯 Strategy Coaching:</strong> Sharing techniques used by top competition performers</li>
+                <li><strong>🔍 Problem Analysis:</strong> Helping you understand what a specific problem is asking</li>
+            </ul><br>
+            
+            <div class="tip-box">
+            💪 <strong>Pro Tip:</strong> Be specific with your questions! Instead of "help me," try "how do I approach combinatorics problems?" or "create a 4-week AIME study plan."
+            </div><br>
+            
+            What specific area would you like to explore? I'm all ears! 🎧`;
+        }
+
+        function getCompFocus(comp) {
+            const focus = {
+                'USAMO': 'proof writing, advanced algebra, geometry, and number theory',
+                'USAJMO': 'creative problem-solving, combinatorics, and proof techniques',
+                'AIME': 'computational skills, pattern recognition, and clever techniques',
+                'AMC': 'quick thinking, fundamental concepts, and test-taking strategy',
+                'USACO': 'algorithms, data structures, and efficient code implementation',
+                'USABO': 'cellular biology, genetics, evolution, and scientific reasoning'
+            };
+            return focus[comp] || 'problem-solving and critical thinking';
+        }
+
+        function getCompTimeline(comp) {
+            if (comp.includes('AMC')) return 'Competitions in November/February—start preparing 2-3 months before';
+            if (comp === 'AIME') return 'Held in March—requires qualifying through AMC 10/12';
+            if (comp.includes('USAMO')) return 'Held in April—requires top AIME scores';
+            if (comp === 'USACO') return 'Four contests throughout the year—practice continuously';
+            return 'Check the official website for exact dates and deadlines';
+        }
+
+        function generateStudyPlanResponse() {
+            const userProblems = currentUser ? currentUser.problemsSolved || 0 : 0;
+            const level = userProblems < 10 ? 'beginner' : userProblems < 50 ? 'intermediate' : 'advanced';
+            const weeklyGoal = level === 'beginner' ? '5-7' : level === 'intermediate' ? '10-15' : '15-20';
+            
+            return `<div class="section-title">📅 Your Personalized Study Plan</div>
+            
+            Based on your <span class="stat-highlight">${userProblems} problems solved</span>, I've created a ${level}-level plan tailored to your current abilities.<br><br>
+            
+            <div class="section-title">🗓️ Weekly Schedule</div>
+            <ol>
+                <li><strong>Monday & Wednesday (90 min each):</strong> Deep focus sessions on ${currentCompetition || 'your target competition'}. Work through 3-4 problems, focusing on understanding rather than speed.</li>
+                
+                <li><strong>Tuesday & Thursday (60 min each):</strong> Watch tutorial videos and review problem-solving techniques. Document key strategies in a notebook.</li>
+                
+                <li><strong>Friday (120 min):</strong> Challenge day! Attempt ${level === 'beginner' ? '2-3 medium' : level === 'intermediate' ? '2-3 hard' : '3-4 competition-level'} problems. Don't look at hints immediately—struggle productively.</li>
+                
+                <li><strong>Saturday (90 min):</strong> Review all mistakes from the week. Redo problems you got wrong. Identify patterns in your errors.</li>
+                
+                <li><strong>Sunday (120 min):</strong> Simulated competition! Take a full timed practice test under real conditions. Analyze your performance afterward.</li>
+            </ol><br>
+            
+            <div class="tip-box">
+            💡 <strong>Pro Tip:</strong> The key to improvement is <span class="highlight">consistent daily practice</span> over long study marathons. Even 30 minutes daily beats 5 hours on Sunday!
+            </div><br>
+            
+            <div class="section-title">🎯 Monthly Milestones</div>
+            <ul>
+                <li>Week 1-2: Master ${level === 'beginner' ? 'fundamental techniques' : level === 'intermediate' ? 'intermediate problem patterns' : 'advanced proof strategies'}</li>
+                <li>Week 3: Take your first full practice test and identify weak areas</li>
+                <li>Week 4: Deep dive into your weakest topic with 10+ focused problems</li>
+                <li>End of Month: You should have solved <span class="highlight">${weeklyGoal} × 4 = ${parseInt(weeklyGoal.split('-')[1]) * 4}+ problems</span></li>
+            </ul><br>
+            
+            <div class="section-title">📊 Track Your Progress</div>
+            Use the <span class="highlight">Analytics tab</span> to monitor your improvement. Aim for <span class="highlight">75%+ accuracy</span> before moving to harder problems.<br><br>
+            
+            Ready to start? Let me know if you'd like specific problem recommendations for today! 🚀`;
+        }
+
+        function recommendResourcesResponse() {
+            const competition = currentCompetition || 'competitions';
+            const competitionName = competition.toUpperCase();
+            
+            return `<div class="section-title">📚 Curated Resources for ${competitionName}</div>
+            
+            I've hand-picked the absolute best resources to accelerate your learning. These aren't just random links—they're proven to work!<br><br>
+            
+            <div class="section-title">🎥 Video Learning (Watch & Learn)</div>
+            <ul>
+                <li><strong>3Blue1Brown</strong> → Beautiful visual explanations that make complex concepts intuitive. Start with his essence of calculus and linear algebra series.</li>
+                
+                <li><strong>Khan Academy</strong> → Perfect for filling knowledge gaps. Their practice problems adapt to your level automatically.</li>
+                
+                <li><strong>Art of Problem Solving</strong> → The gold standard for competition math. Their "Intro to..." series videos are exceptional.</li>
+                
+                <li><strong>MIT OpenCourseWare</strong> → College-level material for advanced students. Free lectures from world-class professors.</li>
+            </ul><br>
+            
+            <div class="section-title">📖 Books That Actually Help</div>
+            <ol>
+                <li><strong>"The Art of Problem Solving" Series</strong> (Volumes 1 & 2) → The bible of competition mathematics. Dense but incredibly rewarding.</li>
+                
+                <li><strong>"Problem-Solving Strategies"</strong> by Arthur Engel → 1300+ problems with detailed solutions. A masterpiece.</li>
+                
+                <li><strong>"How to Solve It"</strong> by George Pólya → Timeless strategies that apply to ANY problem. Read this first!</li>
+                
+                <li>${getCompetitionBook(competition)}</li>
+            </ol><br>
+            
+            <div class="section-title">🌐 Interactive Platforms</div>
+            <ul>
+                <li><strong>Brilliant.org</strong> → Interactive problem-solving. Their competition math course is <span class="highlight">phenomenal</span>.</li>
+                
+                <li><strong>Alcumus (AOPS)</strong> → Automatically adapts difficulty to your level. Track your rating as you improve!</li>
+                
+                <li><strong>Project Euler</strong> → For USACO and programming competitions. Challenging computational problems.</li>
+                
+                <li><strong>Physics Classroom</strong> → Incredibly clear physics explanations with practice problems.</li>
+            </ul><br>
+            
+            <div class="tip-box">
+            🎯 <strong>Smart Learning Strategy:</strong> Don't just consume content—actively engage! Pause videos to solve problems yourself. Take notes. Teach concepts to an imaginary student. <span class="highlight">Active learning is 3x more effective</span> than passive watching.
+            </div><br>
+            
+            ${getCompetitionSpecificResources(competition)}<br>
+            
+            Want me to recommend a specific starting point based on your current level? Just ask! 💪`;
+        }
+
+        function offerExplanationResponse() {
+            const currentProblemData = currentCompetition && problems[currentCompetition] ? 
+                problems[currentCompetition][currentProblemIndex] : null;
+            
+            if (currentProblemData) {
+                const concept = getConceptFromProblem(currentProblemData);
+                const difficulty = currentProblemData.difficulty;
+                
+                return `<div class="section-title">💡 Let's Break Down This Problem Together</div>
+                
+                You're working on <span class="highlight">${currentProblemData.title}</span> (${difficulty} difficulty). Great choice!<br><br>
+                
+                <div class="section-title">🔑 Core Concepts Required</div>
+                This problem tests your understanding of <span class="highlight">${concept}</span>. Make sure you're comfortable with these fundamentals before diving in.<br><br>
+                
+                <div class="section-title">🎯 My Solving Strategy (Follow These Steps)</div>
+                <ol>
+                    <li><strong>Read & Visualize:</strong> Read the problem 3 times. Draw a diagram if possible. What exactly is being asked?</li>
+                    
+                    <li><strong>Extract Information:</strong> List out everything you KNOW vs. what you NEED to find. Write it down!</li>
+                    
+                    <li><strong>Pattern Recognition:</strong> Does this remind you of a problem you've seen before? What techniques worked there?</li>
+                    
+                    <li><strong>Start Simple:</strong> Try ${difficulty === 'hard' ? 'a simpler version with smaller numbers' : 'plugging in easy numbers'} to build intuition.</li>
+                    
+                    <li><strong>Use the Hints:</strong> They're designed to guide you without giving away the answer. Use them strategically!</li>
+                </ol><br>
+                
+                <div class="section-title">🧠 Problem-Solving Mindset</div>
+                <ul>
+                    <li><strong>Stuck for 10+ minutes?</strong> → Take a 5-minute break. Your subconscious will keep working on it!</li>
+                    
+                    <li><strong>Can't start?</strong> → Try working backwards from what you want to prove or calculate.</li>
+                    
+                    <li><strong>Multiple approaches?</strong> → Great! Try the one that feels most intuitive first.</li>
+                    
+                    <li><strong>Made a mistake?</strong> → Excellent! Mistakes are data. What did you learn?</li>
+                </ul><br>
+                
+                <div class="tip-box">
+                💪 <strong>Remember:</strong> Every expert was once a beginner who refused to give up. The struggle IS the learning. Embrace it!
+                </div><br>
+                
+                Want me to explain a specific concept from this problem? Or need help understanding why a certain approach would work? I'm here for you! 🚀`;
+            }
+            
+            return `<div class="section-title">💡 I'm Your Personal Concept Explainer!</div>
+            
+            I can help you understand <span class="highlight">any concept</span> from basic arithmetic to advanced olympiad techniques.<br><br>
+            
+            <div class="section-title">📝 For Problem-Specific Help</div>
+            <ol>
+                <li>Click on any problem in the competitions section</li>
+                <li>Come back here and ask me about it</li>
+                <li>I'll analyze the problem and give you targeted strategies</li>
+                <li>We'll work through it together step-by-step!</li>
+            </ol><br>
+            
+            <div class="section-title">🎓 For General Topics</div>
+            Ask me about:<br>
+            <ul>
+                <li><strong>Math:</strong> Algebra, geometry, number theory, combinatorics, calculus...</li>
+                <li><strong>Science:</strong> Physics concepts, chemistry problems, biology principles...</li>
+                <li><strong>Computer Science:</strong> Algorithms, data structures, complexity analysis...</li>
+                <li><strong>Problem-Solving:</strong> General strategies that work across all domains</li>
+            </ul><br>
+            
+            <div class="tip-box">
+            🎯 <strong>Pro Tip:</strong> The more specific your question, the better I can help! Instead of "explain calculus," try "how do I know when to use u-substitution vs. integration by parts?"
+            </div><br>
+            
+            What would you like to understand better? I'll explain it in a way that actually makes sense! 💡`;
+        }
+
+        function shareStrategyResponse() {
+            const userProblems = currentUser ? currentUser.problemsSolved || 0 : 0;
+            
+            return `<div class="section-title">🎯 Elite Competition Strategies</div>
+            
+            These aren't generic tips—they're <span class="highlight">battle-tested techniques</span> from top performers. With <span class="stat-highlight">${userProblems} problems solved</span>, you're ready to level up!<br><br>
+            
+            <div class="section-title">🧠 Master Problem-Solving Framework</div>
+            <ol>
+                <li><strong>The 30-Second Rule:</strong> Spend 30 seconds just reading and understanding before solving. Most mistakes come from misreading!</li>
+                
+                <li><strong>Pattern Library:</strong> Keep a "tricks notebook." When you learn a new technique, write it down with an example. Review weekly.</li>
+                
+                <li><strong>Backwards Engineering:</strong> Struggling? Start from the answer and work backwards. "What would I need to get this result?"</li>
+                
+                <li><strong>Dimension Analysis:</strong> Check units and dimensions. If you're solving for distance and get negative meters, something's wrong!</li>
+                
+                <li><strong>Extreme Cases:</strong> Test n=0, n=1, n=∞. If your solution fails edge cases, it's probably wrong.</li>
+            </ol><br>
+            
+            <div class="section-title">⏱️ Time Management Mastery</div>
+            <ul>
+                <li><strong>The 3-Pass System:</strong> Pass 1 (15 min) → Solve easy problems. Pass 2 (30 min) → Medium problems. Pass 3 (remaining) → Hard problems + review.</li>
+                
+                <li><strong>5-Minute Rule:</strong> Stuck for 5 minutes with zero progress? Skip it. Your brain will process subconsciously while you work on others.</li>
+                
+                <li><strong>Buffer Time:</strong> Always save 10-15 minutes at the end for checking. One silly mistake can cost you everything!</li>
+                
+                <li><strong>Practice Under Pressure:</strong> Set a timer for 80% of allowed time. This builds speed + stress tolerance.</li>
+            </ul><br>
+            
+            <div class="section-title">📈 Long-Term Growth Accelerators</div>
+            <ol>
+                <li><strong>Mistake Journal:</strong> After every wrong answer, write: (1) What I did, (2) Why it's wrong, (3) The right approach. Review before competitions.</li>
+                
+                <li><strong>Teach to Learn:</strong> Explain solutions to a friend, rubber duck, or yourself. If you can't explain it simply, you don't understand it yet.</li>
+                
+                <li><strong>The 10-Problem Rule:</strong> Don't jump topics until you've solved 10+ problems in one area. Depth beats breadth.</li>
+                
+                <li><strong>Spaced Repetition:</strong> Review problems after 1 day, 1 week, 1 month. This moves concepts from short-term to long-term memory.</li>
+                
+                <li><strong>Study Groups:</strong> Join the AOPS community or form a study group. Explaining concepts to others = 2x learning speed.</li>
+            </ol><br>
+            
+            <div class="section-title">💪 Mental Game & Mindset</div>
+            <ul>
+                <li><strong>Pre-Competition Ritual:</strong> Develop a consistent routine. Same breakfast, same warm-up problems, same mindset mantras.</li>
+                
+                <li><strong>Stress Inoculation:</strong> Practice with slight pressure (parents watching, timer visible). Competition day won't feel as intense.</li>
+                
+                <li><strong>Growth Mindset:</strong> Every mistake is a gift. It shows you exactly what to improve. Embrace the struggle!</li>
+                
+                <li><strong>Sleep > Cramming:</strong> The night before? Sleep 8+ hours. Your brain consolidates learning during sleep. No exceptions!</li>
+            </ul><br>
+            
+            <div class="tip-box">
+            🏆 <strong>Champion's Secret:</strong> The difference between good and great isn't talent—it's <span class="highlight">deliberate practice</span>. Focus on your weaknesses, not your strengths. That's where growth happens!
+            </div><br>
+            
+            <div class="section-title">📊 Track Everything</div>
+            Use our Analytics tab to monitor:<br>
+            • <strong>Accuracy by difficulty</strong> → Are you ready for harder problems?<br>
+            • <strong>Time per problem</strong> → Getting faster with practice?<br>
+            • <strong>Weak topics</strong> → Where to focus next week?<br><br>
+            
+            Which strategy do you want to implement first? Pick ONE and master it before adding more! 💯`;
+        }
+
+        function getCompetitionBook(competition) {
+            const books = {
+                'usamo': '<strong>"Mathematical Olympiad Challenges"</strong> by Andreescu & Gelca → Direct USAMO preparation with brilliant explanations.',
+                'usajmo': '<strong>"Introduction to Algebra"</strong> by AOPS → Perfect foundation for USAJMO level problems.',
+                'aime': '<strong>"The AIME Solutions Manual"</strong> → Past problems with detailed solutions. Study these religiously!',
+                'amc8': '<strong>"AMC 8 Preparation Guide"</strong> → Comprehensive coverage of all topics tested.',
+                'amc10': '<strong>"AMC 10/12 Problem Series"</strong> → Organized by topic for focused practice.',
+                'amc12': '<strong>"Pre-Calculus"</strong> by AOPS → Advanced techniques needed for AMC 12.',
+                'usaco': '<strong>"Competitive Programming"</strong> by Halim & Halim → The USACO competitor\'s handbook.',
+                'usabo': '<strong>"Campbell Biology"</strong> + <strong>"Molecular Biology of the Cell"</strong> → The foundation texts.'
+            };
+            return books[competition] || '<strong>Competition-specific practice books</strong> → Check your competition\'s official website for recommendations.';
+        }
+
+        function getCompetitionSpecificResources(competition) {
+            const resources = {
+                'usamo': `<div class="section-title">🏆 USAMO-Specific Resources</div>
+                <ul>
+                    <li><strong>Official AMC Website:</strong> All past USAMO exams with solutions</li>
+                    <li><strong>AOPS WOOT Program:</strong> Online classes taught by past winners</li>
+                    <li><strong>IMO Compendium:</strong> For the truly ambitious—international olympiad problems</li>
+                    <li><strong>Evan Chen's Website:</strong> Geometry and number theory resources by an IMO gold medalist</li>
+                </ul>`,
+                'usaco': `<div class="section-title">💻 USACO-Specific Resources</div>
+                <ul>
+                    <li><strong>USACO Training Pages:</strong> The official training system with auto-judging</li>
+                    <li><strong>Codeforces:</strong> Practice problems rated by difficulty (start at 800-1200 rating)</li>
+                    <li><strong>CP-Algorithms:</strong> Detailed algorithm explanations with code</li>
+                    <li><strong>USACO Guide:</strong> Community-maintained roadmap by division</li>
+                </ul>`,
+                'usabo': `<div class="section-title">🔬 USABO-Specific Resources</div>
+                <ul>
+                    <li><strong>Khan Academy Biology:</strong> Visual explanations of complex processes</li>
+                    <li><strong>USABO Past Exams:</strong> Practice with real competition questions</li>
+                    <li><strong>Biology StackExchange:</strong> Ask specific questions, get expert answers</li>
+                    <li><strong>Crash Course Biology:</strong> Engaging video series for concept review</li>
+                </ul>`
+            };
+            return resources[competition] || '';
+        }
+
+        function getConceptFromProblem(problem) {
+            const diff = problem.difficulty;
+            const title = problem.title.toLowerCase();
+            
+            if (title.includes('function')) return 'functional equations and algebraic manipulation';
+            if (title.includes('divisible')) return 'number theory and divisibility rules';
+            if (title.includes('array')) return 'algorithms and data structures';
+            if (title.includes('magnitude')) return 'logarithms and distance calculations';
+            if (title.includes('probability')) return 'probability theory and combinatorics';
+            
+            return diff === 'easy' ? 'fundamental concepts and basic operations' :
+                   diff === 'medium' ? 'intermediate problem-solving techniques' :
+                   'advanced mathematical reasoning';
+        }
+
+        function extractCompetition(message) {
+            if (message.includes('usamo')) return 'USAMO';
+            if (message.includes('aime')) return 'AIME';
+            if (message.includes('amc')) return 'AMC';
+            if (message.includes('usaco')) return 'USACO';
+            if (message.includes('usabo')) return 'USABO';
+            return 'this competition';
+        }
+
+        function generateStudyPlan() {
+            addMessageToChat(generateStudyPlanResponse());
+        }
+
+        function recommendResources() {
+            addMessageToChat(recommendResourcesResponse());
+        }
+
+        function offerExplanation() {
+            addMessageToChat(offerExplanationResponse());
+        }
+
+        function shareStrategy() {
+            addMessageToChat(shareStrategyResponse());
+        }
+
+        // Track user performance for adaptive recommendations
+        function trackProblemAttempt(isCorrect) {
+            if (!currentUser || !currentCompetition) return;
+            
+            const problem = problems[currentCompetition][currentProblemIndex];
+            
+            if (!currentUser.performanceData) {
+                currentUser.performanceData = {
+                    weak_topics: [],
+                    strong_topics: [],
+                    recent_attempts: []
+                };
+            }
+            
+            currentUser.performanceData.recent_attempts.push({
+                competition: currentCompetition,
+                difficulty: problem.difficulty,
+                correct: isCorrect,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Keep only last 20 attempts
+            if (currentUser.performanceData.recent_attempts.length > 20) {
+                currentUser.performanceData.recent_attempts.shift();
+            }
+            
+            // Update weak/strong topics based on performance
+            if (!isCorrect) {
+                if (!currentUser.performanceData.weak_topics.includes(currentCompetition)) {
+                    currentUser.performanceData.weak_topics.push(currentCompetition);
+                }
+            } else {
+                const strongIndex = currentUser.performanceData.weak_topics.indexOf(currentCompetition);
+                if (strongIndex > -1) {
+                    currentUser.performanceData.weak_topics.splice(strongIndex, 1);
+                }
+            }
+            
+            localStorage.setItem('user_' + currentUser.email, JSON.stringify(currentUser));
+        }
+
+        // Start app
+        init();
+    </script>
+</body>
+</html>
